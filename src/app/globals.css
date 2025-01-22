@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom colors and themes */
+@layer base {
+  :root {
+    /* Define default light mode color variables using HSL */
+    --background: 0 0% 100%;  /* Light background */
+    --foreground: 0 0% 3.9%;  /* Dark foreground */
+    --card: 0 0% 100%;  /* Light card background */
+    --card-foreground: 0 0% 3.9%;  /* Dark card foreground */
+    --popover: 0 0% 100%;  /* Popover background */
+    --popover-foreground: 0 0% 3.9%;  /* Popover text */
+    --primary: 0 0% 9%;  /* Dark primary */
+    --primary-foreground: 0 0% 98%;  /* Light primary text */
+    --secondary: 0 0% 96.1%;  /* Light secondary */
+    --secondary-foreground: 0 0% 9%;  /* Dark secondary text */
+    --muted: 0 0% 96.1%;  /* Light muted */
+    --muted-foreground: 0 0% 45.1%;  /* Muted text color */
+    --accent: 0 0% 96.1%;  /* Light accent */
+    --accent-foreground: 0 0% 9%;  /* Dark accent text */
+    --destructive: 0 84.2% 60.2%;  /* Destructive action color */
+    --destructive-foreground: 0 0% 98%;  /* Destructive text color */
+    --border: 0 0% 89.8%;  /* Border color */
+    --input: 0 0% 89.8%;  /* Input background color */
+    --ring: 0 0% 3.9%;  /* Ring color */
+    --chart-1: 12 76% 61%;  /* Chart color 1 */
+    --chart-2: 173 58% 39%;  /* Chart color 2 */
+    --chart-3: 197 37% 24%;  /* Chart color 3 */
+    --chart-4: 43 74% 66%;  /* Chart color 4 */
+    --chart-5: 27 87% 67%;  /* Chart color 5 */
+    --radius: 0.5rem;  /* Border radius */
+  }
+
+  /* Dark theme variables */
+  .dark {
+    --background: 0 0% 3.9%;  /* Dark background */
+    --foreground: 0 0% 98%;  /* Light foreground */
+    --card: 0 0% 3.9%;  /* Dark card background */
+    --card-foreground: 0 0% 98%;  /* Light card text */
+    --popover: 0 0% 3.9%;  /* Dark popover background */
+    --popover-foreground: 0 0% 98%;  /* Light popover text */
+    --primary: 0 0% 98%;  /* Light primary background */
+    --primary-foreground: 0 0% 9%;  /* Dark primary text */
+    --secondary: 0 0% 14.9%;  /* Dark secondary */
+    --secondary-foreground: 0 0% 98%;  /* Light secondary text */
+    --muted: 0 0% 14.9%;  /* Dark muted background */
+    --muted-foreground: 0 0% 63.9%;  /* Muted text */
+    --accent: 0 0% 14.9%;  /* Dark accent */
+    --accent-foreground: 0 0% 98%;  /* Light accent text */
+    --destructive: 0 62.8% 30.6%;  /* Dark destructive */
+    --destructive-foreground: 0 0% 98%;  /* Light destructive text */
+    --border: 0 0% 14.9%;  /* Dark border */
+    --input: 0 0% 14.9%;  /* Dark input background */
+    --ring: 0 0% 83.1%;  /* Light ring */
+    --chart-1: 220 70% 50%;  /* Dark chart color 1 */
+    --chart-2: 160 60% 45%;  /* Dark chart color 2 */
+    --chart-3: 30 80% 55%;  /* Dark chart color 3 */
+    --chart-4: 280 65% 60%;  /* Dark chart color 4 */
+    --chart-5: 340 75% 55%;  /* Dark chart color 5 */
+  }
+}
+
+@layer base {
+  /* Remove borders from all elements */
+  * {
+    border: none; /* Remove border */
+  }
+
+  /* Apply background and text color using variables */
+  body {
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))]; /* Apply background and text colors dynamically */
+  }
+}
