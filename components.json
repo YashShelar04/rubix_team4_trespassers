@@ -4,8 +4,13 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
+<<<<<<< Updated upstream
     "config": "tailwind.config.js",
     "css": "src/app/globals.css",
+=======
+    "config": "tailwind.config.ts",
+    "css": "app/globals.css",
+>>>>>>> Stashed changes
     "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""
