@@ -2,6 +2,7 @@ import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import SplineComputer from '@/components/SplineComputer';
 import FeatureButton from '@/components/FeatureButton';
 import HomeBackground from "@/components/HomeBackground";
+import NavBar from "@/components/NavBar";
 
 export default function Home() {
   const words = [
@@ -13,6 +14,7 @@ export default function Home() {
 
   return (
     <>
+      <NavBar/>
       <div className="relative w-full h-[100vh] overflow-hidden">
         {/* accertinity Background */}
          <HomeBackground/>
