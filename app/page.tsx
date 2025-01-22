@@ -1,44 +1,35 @@
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
-import SplineComputer from '@/components/SplineComputer';
-import FeatureButton from '@/components/FeatureButton';
+"use client";
+import React from "react";
+import { useUser, SignInButton, SignOutButton } from "@clerk/nextjs";
 import HomeBackground from "@/components/HomeBackground";
 import NavBar from "@/components/NavBar";
+import HackathonDashboard from "./Dashboard/page";
 
 export default function Home() {
-  const words = [
-    { text: "Innovate," },
-    { text: "Collaborate," },
-    { text: "Succeed" },
-    { text: "!" },
-  ];
+  const { isSignedIn, user } = useUser();
+
+  if (isSignedIn) {
+    return <HackathonDashboard />;
+  }
 
   return (
     <>
-      
       <div className="relative w-full h-[100vh] overflow-hidden">
-        {/* accertinity Background */}
-         <HomeBackground/>
-        <div/>
-
+        {/* Background */}
+        <HomeBackground />
         {/* Content Overlay */}
         <div className="relative z-10 w-screen h-full pointer-events-none">
           <div className="pointer-events-auto">
-            <NavBar/>
+            <NavBar />
           </div>
           {/* Login/Signup Button */}
           <div className="absolute top-5 right-10 pointer-events-auto">
-            <button className="text-white bg-purple-700 rounded-xl shadow-lg px-2 py-2 z-20 cursor-pointer">
-              Login/Signup
-            </button>
+            <SignInButton>
+              <button className="text-white bg-purple-700 rounded-xl shadow-lg px-2 py-2 z-20 cursor-pointer">
+                Login/Signup
+              </button>
+            </SignInButton>
           </div>
-          {/* <div className="absolute top-5 left-10 pointer-events-auto">
-          <FeatureButton />
-          </div> */}
-
-          {/* Typewriter Effect */}
-          {/* <div className="w-full flex justify-center mt-10">
-            <TypewriterEffectSmooth words={words} />
-          </div> */}
         </div>
       </div>
     </>
