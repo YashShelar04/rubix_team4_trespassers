@@ -19,8 +19,8 @@ function NavBar({ className }: { className?: string }) {
         <MenuItem setActive={setActive} active={active} item="Features">
           <div className="  text-sm grid grid-cols-2 gap-10 p-4">
             <ProductItem
-              title="Algochurn"
-              href="https://algochurn.com"
+              title="Mentor Connect"
+              href="/mentor-connect"
               src="https://assets.aceternity.com/demos/algochurn.webp"
               description="Prepare for tech interviews like never before."
             />
