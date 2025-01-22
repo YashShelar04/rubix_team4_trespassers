@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <>
-      <NavBar/>
+      
       <div className="relative w-full h-[100vh] overflow-hidden">
         {/* accertinity Background */}
          <HomeBackground/>
@@ -22,15 +22,18 @@ export default function Home() {
 
         {/* Content Overlay */}
         <div className="relative z-10 w-screen h-full pointer-events-none">
+          <div className="pointer-events-auto">
+            <NavBar/>
+          </div>
           {/* Login/Signup Button */}
           <div className="absolute top-5 right-10 pointer-events-auto">
             <button className="text-white bg-purple-700 rounded-xl shadow-lg px-2 py-2 z-20 cursor-pointer">
               Login/Signup
             </button>
           </div>
-          <div className="absolute top-5 left-10 pointer-events-auto">
+          {/* <div className="absolute top-5 left-10 pointer-events-auto">
           <FeatureButton />
-          </div>
+          </div> */}
 
           {/* Typewriter Effect */}
           {/* <div className="w-full flex justify-center mt-10">
