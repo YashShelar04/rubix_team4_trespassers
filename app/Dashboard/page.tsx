@@ -48,6 +48,12 @@ export default function HackathonDashboard() {
           </div>
 
           <div className="flex items-center space-x-6 w-full md:w-auto justify-end relative z-10">
+          <Button
+              onClick={() => window.location.href = 'http://localhost:5173'}
+              className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-lg shadow-purple-500/20 rounded-xl px-6 py-3 transform hover:scale-105 transition-all duration-200"
+            >
+              Virtual Environment
+            </Button>
           <Link href="/freelance">
           <Button
               // onClick={() => setIsScheduleOpen(true)}
