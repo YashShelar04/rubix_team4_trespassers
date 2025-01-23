@@ -142,8 +142,8 @@
   
   .theme-toggle {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 5px;
+    right: 5px;
     background: none;
     border: none;
     color: var(--text);
@@ -172,4 +172,21 @@
     margin-top: 2px;
   }
   
+  nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--primary);
+    padding: 10px 0;
+    border-radius: 8px;
+  }
   
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: var(--primary-hover);
+  }

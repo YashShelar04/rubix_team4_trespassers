@@ -3,7 +3,7 @@
     "name": "Task Progress Tracker",
     "version": "1.0",
     "description": "Tracks and reminds team members about pending tasks.",
-    "permissions": ["storage", "alarms", "notifications"],
+    "permissions": ["storage", "alarms", "notifications","background"],
     "background": {
       "service_worker": "background.js"
     },

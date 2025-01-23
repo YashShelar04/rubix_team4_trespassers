@@ -6,15 +6,37 @@
   <title>Team Progress Tracker</title>
   <link rel="stylesheet" href="popup.css">
   <style>
-    body{
-        width: 300px;
+    body {
+      width: 300px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background-color: var(--primary);
+      padding: 10px 0;
+      border-radius: 8px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary-hover);
     }
   </style>
 </head>
 <body>
+  <nav>
+    <a href="popup.html">Team Tasks</a>
+    <a href="pomodoro.html">Pomodoro Timer</a>
+  </nav>
   <div class="container">
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
-    <h1>Team Tasks</h1>
     <form id="task-form">
       <input type="text" id="task" placeholder="Task name" required />
       <input type="text" id="assignee" placeholder="Assign to" required />
