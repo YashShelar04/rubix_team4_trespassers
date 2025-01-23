@@ -1,23 +1,32 @@
 "use client"
-import React, { useState, useEffect } from 'react'
-import { Search, Zap, FileCode, Users, HelpCircle, Sun, Moon, Calendar } from 'lucide-react'
+import React, { useState, useEffect } from "react"
+import { Search, Zap, FileCode, Users, HelpCircle, Sun, Moon, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import EventOverview from '../components/EventOverview'
-import ProjectShowcase from '../components/ProjectShowcase'
-import Leaderboard from '../components/Leaderboard'
-import LiveAnnouncements from '../components/LiveAnnouncements'
-import ScheduleModal from '../components/ScheduleModal'
-import { useClerk } from '@clerk/clerk-react'
+import EventOverview from "../components/EventOverview"
+import ProjectShowcase from "../components/ProjectShowcase"
+import Leaderboard from "../components/Leaderboard"
+import LiveAnnouncements from "../components/LiveAnnouncements"
+import ScheduleModal from "../components/ScheduleModal"
+import Link from "next/link"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useClerk } from '@clerk/clerk-react';
+import { useRouter } from 'next/router';
 
 export default function HackathonDashboard() {
-  const { signOut } = useClerk()
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState("")
   const [currentTime, setCurrentTime] = useState(new Date())
   const [isDarkMode, setIsDarkMode] = useState(true)
   const [isScheduleOpen, setIsScheduleOpen] = useState(false)
+  const user = { name: "John Doe", profilePicture: "/placeholder-avatar.png" } // Example user data
+  const { signOut } = useClerk();
+  // const router = useRouter();
 
-  // ... rest of the existing state and handlers ...
+  const handleSignOut = () => {
+    signOut().then(() => {
+      window.location.href = '/';
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
@@ -33,31 +42,21 @@ export default function HackathonDashboard() {
                 Hackathon Hub
               </span>
             </h1>
-            <Button
-              variant="ghost"
-              className="rounded-full p-2"
-              onClick={() => setIsDarkMode(!isDarkMode)}
-            >
-              {isDarkMode ?
-                <Sun className="h-5 w-5 text-yellow-400" /> :
-                <Moon className="h-5 w-5 text-gray-400" />
-              }
+            <Button variant="ghost" className="rounded-full p-2" onClick={() => setIsDarkMode(!isDarkMode)}>
+              {isDarkMode ? <Sun className="h-5 w-5 text-yellow-400" /> : <Moon className="h-5 w-5 text-gray-400" />}
             </Button>
           </div>
 
-          <div className="flex items-center space-x-6 w-full md:w-auto">
-            <form className="flex-1 md:w-96">
-              <div className="relative">
-                <Input
-                  type="text"
-                  placeholder="Search projects, teams..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-gray-800/50 border-gray-700 text-gray-100 focus:border-cyan-400 rounded-xl pl-12 pr-4 h-12"
-                />
-                <Search className="h-5 w-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              </div>
-            </form>
+          <div className="flex items-center space-x-6 w-full md:w-auto justify-end relative z-10">
+          <Link href="/freelance">
+          <Button
+              // onClick={() => setIsScheduleOpen(true)}
+              className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-lg shadow-purple-500/20 rounded-xl px-6 py-3 transform hover:scale-105 transition-all duration-200"
+            >
+              Freelance
+            </Button>
+          </Link>
+          
             <Button
               onClick={() => setIsScheduleOpen(true)}
               className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-lg shadow-purple-500/20 rounded-xl px-6 py-3 transform hover:scale-105 transition-all duration-200"
@@ -65,47 +64,66 @@ export default function HackathonDashboard() {
               <Calendar className="h-5 w-5 mr-2" />
               Schedule
             </Button>
-            <Button
-              className="bg-red-500 text-white px-4 py-2 rounded"
-              onClick={() => signOut()}
-            >
-              Sign Out
-            </Button>
+            <Link href="/userDashboard" className="ml-4 relative group">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 opacity-75 blur-sm group-hover:opacity-100 transition-opacity duration-300"></div>
+              <Avatar className="h-10 w-10 cursor-pointer border-2 border-transparent group-hover:border-white transition-all duration-300 relative z-10">
+                <AvatarImage src={user.profilePicture || "/placeholder-avatar.png"} alt={user.name} />
+                <AvatarFallback className="bg-gray-800 text-cyan-400">
+                  {user.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
+                </AvatarFallback>
+              </Avatar>
+            </Link>
           </div>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="lg:col-span-12 flex justify-end">
+            <button onClick={handleSignOut} className="btn btn-primary">
+              Sign Out
+            </button>
+          </div>
           <div className="lg:col-span-12">
             <EventOverview />
           </div>
-          <div className="lg:col-span-5 space-y-8"> {/* Increased width slightly for ProjectShowcase */}
+          <div className="lg:col-span-5 space-y-8">
+            {" "}
+            {/* Increased width slightly for ProjectShowcase */}
             <ProjectShowcase />
           </div>
-          <div className="lg:col-span-4 space-y-8"> {/* Middle column */}
+          <div className="lg:col-span-4 space-y-8">
+            {" "}
+            {/* Middle column */}
             <LiveAnnouncements />
           </div>
-          <div className="lg:col-span-3 space-y-8"> {/* Decreased width slightly for Leaderboard */}
+          <div className="lg:col-span-3 space-y-8">
+            {" "}
+            {/* Decreased width slightly for Leaderboard */}
             <Leaderboard />
           </div>
         </div>
 
-
         <div className="fixed bottom-8 right-8 space-x-4">
-          <Button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-lg shadow-green-500/20 rounded-xl px-6 py-3 transform hover:scale-105 transition-all duration-200">
-            <FileCode className="h-5 w-5 mr-2" /> Submit Project
+         
+          <Link href="/JoinTeams">
+            <Button className="bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white shadow-lg shadow-cyan-500/20 rounded-xl px-6 py-3 transform hover:scale-105 transition-all duration-200">
+              <Users className="h-5 w-5 mr-2" /> Join Team
+            </Button>
+          </Link>
+          <Link href="/mentor-connect">
+          <Button 
+            // onClick={handleMentorSessionsClick}
+            className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white shadow-lg shadow-purple-500/20 rounded-xl px-6 py-3 transform hover:scale-105 transition-all duration-200"
+          >
+            <HelpCircle className="h-5 w-5 mr-2" /> Mentor Sessions
           </Button>
-          <Button className="bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white shadow-lg shadow-cyan-500/20 rounded-xl px-6 py-3 transform hover:scale-105 transition-all duration-200">
-            <Users className="h-5 w-5 mr-2" /> Join Team
-          </Button>
-          <Button className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white shadow-lg shadow-purple-500/20 rounded-xl px-6 py-3 transform hover:scale-105 transition-all duration-200">
-            <HelpCircle className="h-5 w-5 mr-2" /> Ask for Help
-          </Button>
+          </Link>
+          
         </div>
 
-        <ScheduleModal
-          isOpen={isScheduleOpen}
-          onClose={() => setIsScheduleOpen(false)}
-        />
+        <ScheduleModal isOpen={isScheduleOpen} onClose={() => setIsScheduleOpen(false)} />
       </div>
     </div>
   )

@@ -25,8 +25,8 @@ function NavBar({ className }: { className?: string }) {
               description="Prepare for tech interviews like never before."
             />
             <ProductItem
-              title="Tailwind Master Kit"
-              href="https://tailwindmasterkit.com"
+              title="Project Submission"
+              href="/submissions"
               src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
               description="Production ready Tailwind css components for your next project"
             />

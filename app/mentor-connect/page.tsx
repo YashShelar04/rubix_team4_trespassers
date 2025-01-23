@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Search, Video, ArrowLeft, Users, Sparkles } from "lucide-react"
+import { Search, Video, ArrowLeft, Users, Sparkles,Mail } from "lucide-react"
 
 type View = "initial" | "mentor-form" | "mentor-list"
 
@@ -15,14 +15,15 @@ interface Mentor {
   domain: string
   rating: number
   sessions: number
+  email: string // Added email attribute
 }
 
 // Sample mentor data
 const mentors: Mentor[] = [
-  { id: "1", name: "John Doe", domain: "Web Development", rating: 4.8, sessions: 24 },
-  { id: "2", name: "Jane Smith", domain: "Machine Learning", rating: 4.9, sessions: 32 },
-  { id: "3", name: "Mike Johnson", domain: "Mobile Development", rating: 4.7, sessions: 18 },
-  { id: "4", name: "Sarah Wilson", domain: "UI/UX Design", rating: 4.9, sessions: 45 },
+  { id: "1", name: "John Doe", domain: "Web Development", rating: 4.8, sessions: 24, email: "john.doe@example.com" },
+  { id: "2", name: "Jane Smith", domain: "Machine Learning", rating: 4.9, sessions: 32, email: "jane.smith@example.com" },
+  { id: "3", name: "Mike Johnson", domain: "Mobile Development", rating: 4.7, sessions: 18, email: "mike.johnson@example.com" },
+  { id: "4", name: "Sarah Wilson", domain: "UI/UX Design", rating: 4.9, sessions: 45, email: "sarah.wilson@example.com" },
 ]
 
 export default function MentorConnect() {
@@ -164,8 +165,13 @@ export default function MentorConnect() {
                             {mentor.sessions} sessions
                           </span>
                           <span>⭐ {mentor.rating}</span>
+                            <span className="flex items-center">
+                            <Mail className="h-4 w-4 mr-1" />
+                            {mentor.email}
+                            </span>
                         </div>
                       </div>
+                      <Link href="/video">
                       <Button
                         variant="secondary"
                         size="sm"
@@ -173,6 +179,7 @@ export default function MentorConnect() {
                       >
                         <Video className="h-4 w-4" />
                       </Button>
+                      </Link>
                     </CardContent>
                   </Card>
                 ))}

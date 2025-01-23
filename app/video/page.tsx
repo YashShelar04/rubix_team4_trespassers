@@ -14,6 +14,14 @@ export default function Home() {
   useEffect(() => {
     setFullName("");
   }, []);
+
+  const handleJoinClick = () => {
+    if (fullName && fullName.toLowerCase().includes('mentor')) {
+      window.open('http://localhost:3000/judge-form', '_blank');
+    }
+    // Add any other logic for joining the room here
+  };
+
   return (
     <div className="w-full h-screen">
       <section className="bg-gray-950 text-white">
@@ -25,20 +33,19 @@ export default function Home() {
             <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text font-extrabold text-transparent text-5xl">
               <span className="block">with team members</span>
             </h1>
-            <p className="mx-auto mt-6 max-w-xl sm:text-xl/relaxed">
+            {/* <p className="mx-auto mt-6 max-w-xl sm:text-xl/relaxed">
               Zegocloud is a global communication service provider which
               provides them developer-friendly and powerful SDK & APIs
-            </p>
+            </p> */}
             <div className="flex items-center justify-center gap-4 mt-6">
               <input
                 type="text"
                 id="name"
                 onChange={(e) => setFullName(e.target.value.toString())}
                 className="border rounded-md focus:border-transparent focus:outline-none focus:ring-0 px-4 py-2 w-full text-black"
-                placeholder="Enter your name"
+                placeholder="Enter your name (Enter 'Mentor' if you are judging panel)"
               />
             </div>
-
             {fullName && fullName.length >= 3 && (
               <>
                 <div className="flex items-center justify-center gap-4 mt-6">
@@ -52,7 +59,12 @@ export default function Home() {
                   />
                   <button
                     className="rounded-md bg-blue-600 px-10 py-[11px] text-sm font-medium text-white focus:outline-none sm:w-auto"
-                    onClick={() => router.push(`/room/${roomID}`)}
+                    onClick={async () => {
+                      await router.push(`/room/${roomID}`);
+                      setTimeout(() => {
+                        handleJoinClick();
+                      }, 1000);
+                    }}
                     disabled={!roomID}
                   >
                     Join
